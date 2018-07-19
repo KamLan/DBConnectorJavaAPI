@@ -1,16 +1,9 @@
 package main.java.mysql;
 
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.util.JSON;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
 import net.minidev.json.JSONArray;
 
-import java.io.CharArrayReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +14,7 @@ import static main.java.mysql.Data.convertToJSON;
 
 public class DataBase {
 
-    public static JSONArray SQLConnector(String user, String password, String server, String db, String type, String request){
+    public static JSONArray SQLConnector(String user, String password, String server, String db, String table, String type, String request){
 
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(user);
@@ -36,9 +29,12 @@ public class DataBase {
             Connection connection = (Connection) dataSource.getConnection();
             st = connection.createStatement();
             st.executeQuery(sqlUseDb);
-            if (type.equals("UPDATE")){
+            if (type.equals("UPDATE") || type.equals("INSERT")){
                 ps = connection.prepareStatement(request);
                 ps.executeUpdate();
+            }
+            if(type.equals("DELETE")){
+                mysqlDelete(user,password,server,db,table);
             }
             else{
                 rs = st.executeQuery(request);
@@ -78,13 +74,13 @@ public class DataBase {
         return JsonArray;
     }
 
-    public static JSONArray mysqlDelete(String user, String password, String server, String db, String request){
+    public static String mysqlDelete(String user, String password, String server, String db, String request){
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(user);
         dataSource.setPassword(password);
         dataSource.setServerName(server);
-        JSONArray JsonArray = null;
         Statement st;
+        String result = "";
         ResultSet rs = null;
         PreparedStatement ps;
         String sqlUseDb = "USE "+db+";";
@@ -94,22 +90,30 @@ public class DataBase {
             st.executeQuery(sqlUseDb);
             ps = connection.prepareStatement(request);
             ps.executeUpdate();
+            result = "delete is a success";
         } catch (SQLException e) {
 
             e.printStackTrace();
+            result = "delete has failed";
         }
-        return JsonArray;
+        return result;
     }
 
-    public static JSONArray MongoConnector(String user, String password, String server, String db, String type, String request){
+    public static JSONArray mysqlJson(String user, String password, String server, String db, String type, String request){
         JSONArray JsonArray = new JSONArray();
-        char[] pw = password.toCharArray();
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setUser(user);
+        dataSource.setPassword(password);
+        dataSource.setServerName(server);
+        PreparedStatement ps;
+        try{
+            Connection connection = (Connection) dataSource.getConnection();
+            ps = connection.prepareStatement(request);
+            ps.executeUpdate();
+            out.print(ps);
+        }catch(Exception e){
 
-        //MongoClient mongoClient = new MongoClient(new MongoClientURI(server));
-        //MongoCredential credential = MongoCredential.createCredential(user, db, pw);
-        //MongoDatabase database = mongoClient.getDatabase("db");
-
-
+        }
         return JsonArray;
     }
 
