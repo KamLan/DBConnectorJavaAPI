@@ -4,17 +4,18 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import net.minidev.json.JSONArray;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import com.mysql.jdbc.Connection;
 
 import static java.lang.System.out;
 import static main.java.mysql.Data.convertToJSON;
 
 public class DataBase {
 
-    public static JSONArray SQLConnector(String user, String password, String server, String db, String table, String type, String request){
+    public static JSONArray SQLConnector(String user, String password,
+                                         String server, String port,
+                                         String db, String table, String type,
+                                         String request){
 
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(user);
@@ -49,7 +50,7 @@ public class DataBase {
         return JsonArray;
     }
 
-    public static JSONArray SQLInfo(String user, String password, String server, String db, String table){
+    public static JSONArray SQLInfo(String user, String password, String server, String port, String db, String table){
 
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(user);
@@ -67,6 +68,7 @@ public class DataBase {
             st.executeQuery(sqlUseDb);
             rs = st.executeQuery(request);
             JsonArray = convertToJSON(rs);
+            System.out.println(JsonArray);
         } catch (SQLException e) {
 
             e.printStackTrace();

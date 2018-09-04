@@ -7,6 +7,8 @@
           <element id="module-output" name="DbConnectorAPI" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:2.0.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.0.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.7.RELEASE" />
@@ -38,6 +40,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:2.0.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.31" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.31" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.5.31" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: net.minidev:json-smart:2.3" />
           <element id="library" level="project" name="Maven: net.minidev:accessors-smart:1.2" />

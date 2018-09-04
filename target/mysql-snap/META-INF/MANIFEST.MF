@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: mysql
+Implementation-Version: snap
+Built-By: kam
+Implementation-Vendor-Id: main.java
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_161
+Main-Class: ${start-class}
+
